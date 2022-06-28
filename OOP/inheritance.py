@@ -5,6 +5,9 @@ class PredatoryCreditCard(CreditCard):
   A class to extend the functionality of the CrediCard class
   """
 
+  OVERLIMIT_FEE = 5
+  __slots__ = '_apr'
+
   def __init__(self, customer, bank, account, limit, apr):
     """
         initial balance is zero
@@ -28,7 +31,7 @@ class PredatoryCreditCard(CreditCard):
 
     success = super().charge(price)     #calling inherited method
     if not success:
-      self._balance += 5
+      self._balance += PredatoryCreditCard.OVERLIMIT_FEE
     return success
 
   def process_month(self):

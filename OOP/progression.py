@@ -61,13 +61,13 @@ class ArithmeticProgression(Progression):
     """Update value by adding increment"""
     self._current += self._increment
 
-    return self._current
+    # return self._current
 
 
 class GeometricProgression(Progression):
   """An iterator producing a geometric progession"""
 
-  def __init__(self, base=2, start=0):
+  def __init__(self, base=2, start=1):
     """
       Create a new geometric progression
 
@@ -80,4 +80,38 @@ class GeometricProgression(Progression):
   def _advance(self):
     self._current *= self._base
 
-    return self._current
+    # return self._current
+
+class FibonacciProgression(Progression):
+  """Iterator producing a Fibonacci progression."""
+
+  def __init__(self, first=0, second=1):
+    """
+    Create a new fibonacci progression.
+
+    first     First expected value in the progression
+    second    Second expected value in the progression
+    """
+    super().__init__(first)
+    self._prev = second - first
+
+  def _advance(self):
+    """Update current value by taking sum of previous two"""
+    self._prev, self._current = self._current, self._prev + self._current
+
+
+# if __name__ == "__main__":
+print('Default progression:' )
+Progression().print_progression(10)
+print('Arithmetic progression with increment 5: ')
+ArithmeticProgression(5).print_progression(10)
+print('Arithmetic progression with increment 5 and start 2: ')
+ArithmeticProgression(5, 2).print_progression(10)
+print("Geometric progression with default base: ")
+GeometricProgression().print_progression(10)
+print("Geometric progression with base 3: ")
+GeometricProgression(3).print_progression(10)
+print("Fibonacci progression with default start values: ")
+FibonacciProgression().print_progression(10)
+print("Fibonacci progression with start values 4 and 6: ")
+FibonacciProgression(4, 6).print_progression(10)

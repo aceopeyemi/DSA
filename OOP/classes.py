@@ -13,6 +13,8 @@ class CreditCard:
   limit    Credit limit (measured in Naira) 
   
   """
+  __slots__ = '_customer', '_bank', "_account", '_balance', '_limit'
+
   def __init__(self, customer, bank, account, limit):
     self._customer = customer
     self._bank = bank
