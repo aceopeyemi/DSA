@@ -1,9 +1,37 @@
 class Vector:
-  """Representing a vector in a multidimensional space"""
+  """
+  -----------
+  Vector
+  -----------
 
-  def __init__(self, d):
+
+  Representing a vector in a multidimensional space
+  
+  ----------
+  parameters
+  ----------
+  d   - dimension of vector to be created (optional)
+
+  arr - iterable represetation of vector to be created (optional)
+
+  Vector can only accept one of the parameters not both at once.
+
+  """
+
+  def __init__(self, d=None, arr=None):
     """Create a d-dimensional vector of zeros"""
-    self._coords = [0] * d
+    if ((d is not None) and (arr is None)):
+      try:
+        self._coords = [0] * d
+      except:
+        TypeError("D must be an integer")
+    elif ((arr is not None and (d is None))):
+      try:
+        self._coords = arr
+      except:
+        TypeError("arr must be an iterable type")
+    else:
+      ValueError("Vector cannot accept both parameters")
 
   def __len__(self):
     """Returns the length of vector instance"""
@@ -66,16 +94,17 @@ class Vector:
     the vector instance by val.
     """
     result = Vector(len(self))
-
+    sum = 0
     if isinstance(val, (int, float)):
       for i in range(len(result)):
         result[i] = self[i] * val
+        sum += result[i]
 
     elif isinstance(val, Vector):
       for i in range(len(result)):
         result[i] = self[i] * val[i]
 
-    return result
+    return sum
 
   def __rmul__(self, val):
     """

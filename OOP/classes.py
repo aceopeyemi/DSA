@@ -188,4 +188,3 @@ class Range:
           raise IndexError("Out of Range")  # check if index specified is within range
         
         return self._start + k * self._step
-
